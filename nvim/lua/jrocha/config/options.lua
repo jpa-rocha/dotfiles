@@ -20,3 +20,5 @@ vim.opt.mouse = ""
 
 -- Clipboard
 vim.opt.clipboard = "unnamedplus"
+
+vim.opt.wrap = false

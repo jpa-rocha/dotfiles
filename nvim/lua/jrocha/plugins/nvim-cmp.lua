@@ -14,7 +14,6 @@ return {
   },
   config = function()
 	local cmp = require("cmp")
-
 	local luasnip = require("luasnip")
 
 	local cmp_autopairs = require('nvim-autopairs.completion.cmp')
@@ -23,7 +22,7 @@ return {
 	  cmp_autopairs.on_confirm_done()
 	)
 	require("luasnip.loaders.from_vscode").lazy_load()
-
+    local select_opts = {behavior = cmp.SelectBehavior.Select}
 	cmp.setup({
 	  completion = {
 		completeopt = "menu, menuone, preview, noselect",
@@ -43,6 +42,24 @@ return {
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            local col = vim.fn.col('.') - 1
+
+            if cmp.visible() then
+                cmp.select_next_item(select_opts)
+            elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+                fallback()
+            else
+                cmp.complete()
+            end
+        end, {'i', 's'}),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item(select_opts)
+            else
+                fallback()
+            end
+        end, {'i', 's'}),
 	  }),
 
 	  sources = cmp.config.sources({
