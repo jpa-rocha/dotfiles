@@ -27,7 +27,6 @@ return {
                     name = "LSP",
                     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Show Document Symbols" }
                 },
-                l = { require("lint").try_lint(), "Lint Current File" },
                 g = {
                     name ="Git",
                     g = { "<cmd>Neogit<cr>", "NeoGit" },
