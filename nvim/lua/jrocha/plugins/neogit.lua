@@ -11,7 +11,7 @@ return {
     config = function()
         require("neogit").setup({
             disable_hint = true,
-            kind = "replace", -- opens neogit in a split
+            kind = "replace",
             signs = {
                 section = { "", "" },
                 item = { "", "" },

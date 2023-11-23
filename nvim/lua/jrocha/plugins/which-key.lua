@@ -22,7 +22,8 @@ return {
                     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
                     s = { "<cmd>Telescope live_grep<cr>", "Find String in CWD" },
                     t = { "<cmd>TodoTelescope<cr>", "Find TODO's" },
-                    m = { "<cmd>Telescope commands<cr>", "Find Commands" }
+                    m = { "<cmd>Telescope commands<cr>", "Find Commands" },
+                    C = { "<cmd>Telescope colorscheme<cr>", "Find Colorschemes" }
                 },
                 s = {
                     name = "LSP",
@@ -39,7 +40,9 @@ return {
                     R = { "<cmd>Gitsigns reset_buffer<cr>", "Revert Buffer" },
                     b = { "<cmd>Gitsigns blame_line<cr>", "Blame Line" },
                 },
-                d = { search_and_replace, "Search & Replace" }
+                d = { search_and_replace, "Search & Replace" },
+                L = { "<cmd>Lazy<cr>" , "Lazy"},
+                M = { "<cmd>Mason<cr>", "Mason" },
             },
         })
     end,
