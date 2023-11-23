@@ -34,6 +34,7 @@ return {
             bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename')
             bufmap('n', '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', 'Format')
             bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Show Code Actions')
+            bufmap('n', '<leader>sL', '<cmd>Telescope diagnostics<cr>', 'Show Page Diagnostics')
             bufmap('n', '<leader>sl', '<cmd>lua vim.diagnostic.open_float()<cr>', 'Show Diagnostics')
             bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', 'Previous Diagnostic')
             bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', 'Next Diagnostic')

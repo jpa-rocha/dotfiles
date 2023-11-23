@@ -1,6 +1,6 @@
 return {
-
     'nvim-telescope/telescope.nvim',
+    event = "VeryLazy",
     tag = '0.1.4',
     dependencies = {
         "nvim-lua/plenary.nvim",
@@ -89,6 +89,6 @@ return {
         })
 
         telescope.load_extension("fzf")
-        require("telescope").load_extension "file_browser"
+        telescope.load_extension("file_browser")
     end,
 }

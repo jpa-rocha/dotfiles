@@ -1,6 +1,7 @@
 return {
     'nvim-lualine/lualine.nvim', -- plugin to install
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+    lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function () -- the configuration code
         local lualine = require('lualine')
 		local lazy_status = require("lazy.status")
@@ -22,4 +23,4 @@ return {
             },
         })
     end
-} 
+}

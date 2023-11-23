@@ -1,5 +1,9 @@
 return {
     'numToStr/Comment.nvim',
+    event = {
+        "BufReadPre",
+        "BufNewFile",
+    },
     opts = {
         padding = true,
         ---Whether the cursor should stay at its position

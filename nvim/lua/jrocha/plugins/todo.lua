@@ -1,5 +1,6 @@
 return {
 	"folke/todo-comments.nvim",
+    event = "VeryLazy",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	opts = {
 	sign_priority = 8, -- sign priority

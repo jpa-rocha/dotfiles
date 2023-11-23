@@ -1,6 +1,6 @@
 return {
     "folke/which-key.nvim",
-    -- event = "VeryLazy",
+    event = "VeryLazy",
     config = function()
         local wk = require "which-key"
         vim.o.timeout = true
@@ -21,7 +21,8 @@ return {
                     f = { "<cmd>Telescope find_files<cr>", "Find File" },
                     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
                     s = { "<cmd>Telescope live_grep<cr>", "Find String in CWD" },
-                    t = { "<cmd>TodoTelescope<cr>", "Find TODO's" }
+                    t = { "<cmd>TodoTelescope<cr>", "Find TODO's" },
+                    m = { "<cmd>Telescope commands<cr>", "Find Commands" }
                 },
                 s = {
                     name = "LSP",
