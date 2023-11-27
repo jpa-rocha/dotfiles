@@ -28,10 +28,9 @@ return {
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠈⠉⠁⠈⠉⠁⠉⠉⠀⠉⠉⠈⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
         }
         dashboard.section.buttons.val = {
-            dashboard.button( "e", "  New file" , ":ene <BAR> startinsert <CR>"),
+            dashboard.button( "Space f b", "  File Browser", "<leader> fb"),
             dashboard.button( "Space f f", "󰍉  Find File" , "<leader> ff"),
             dashboard.button( "Space f r", "  Find Recent" , "<leader> fr"),
-            dashboard.button( "Space f b", "  File Browser", "<leader> fb"),
             dashboard.button( "q", "󰗼  Quit NVIM" , ":qa<CR>"),
         }
 

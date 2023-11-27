@@ -43,6 +43,7 @@ return {
                 d = { search_and_replace, "Search & Replace" },
                 L = { "<cmd>Lazy<cr>" , "Lazy"},
                 M = { "<cmd>Mason<cr>", "Mason" },
+                N = { "<cmd>Neorg<cr>", "Neorg" }
             },
         })
     end,
