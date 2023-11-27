@@ -122,19 +122,11 @@ return {
                     }
                 }
             },
-            -- settings = {
-            --     Lua = {
-            --         diagnostics = {
-            --             globals = { "vim" },
-            --         },
-            --         completion = {
-            --             callSnippet = "Replace"
-            --         },
-            --         workspace = {
-            --             checkThirdParty = false,
-            --         }
-                -- },
-            -- },
+        })
+
+        -- configure ts & js
+        lspconfig.tsserver.setup({
+            capabilities = lsp_capabilities,
         })
 
         -- configure rust

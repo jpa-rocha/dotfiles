@@ -34,7 +34,8 @@ return {
                 "cssls",
                 "bashls",
                 "rust_analyzer",
-                "clangd"
+                "clangd",
+                "tsserver",
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed
@@ -54,7 +55,9 @@ return {
                 "beautysh",
                 "shellharden",
                 "shfmt",
-                "clang-format"
+                "clang-format",
+                "prettier",
+                "eslint_d"
             },
         })
     end,
