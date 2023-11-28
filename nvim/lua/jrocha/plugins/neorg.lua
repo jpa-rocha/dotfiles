@@ -1,5 +1,6 @@
 return  {
     "nvim-neorg/neorg",
+    event ="VeryLazy",
     build = ":Neorg sync-parsers",
     dependencies = {
         "nvim-treesitter/nvim-treesitter",
