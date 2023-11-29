@@ -1,12 +1,20 @@
 #! /usr/bin/bash
-
+CONFIG_PATH="$HOME/.config/dotfiles/"
 RIPGREP_VERSION='13.0.0'
 RIPGREP_FILE="ripgrep_${RIPGREP_VERSION}_amd64.deb"
 SHARKFD_VERSION='8.7.1'
 SHARKFD_FILE="fd-musl_${SHARKFD_VERSION}_amd64.deb"
+GO_VERSION="1.21.4"
+GO_FILE="go${GO_VERSION}.linux-amd64.tar.gz"
+NVIM_VERSION="0.9.1"
+NVIM_FOLDER="nvim-linux64"
+NVIM_FILE="${NVIM_FOLDER}.tar.gz"
 
 # Regular text colors
 BLACK='\033[0;30m'
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -38,64 +46,199 @@ BG_WHITE='\033[47m'
 # Reset text formatting
 RESET='\033[0m'
 
-echo -e ""
-echo -e "${YELLOW}Checking for updates:${RESET}"
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get install xsel
-echo -e ""
+function check_bashrc {
+    local "$file_path"="$1"
+    local "$line_to_check"="$2"
 
-echo -e "${YELLOW}##############################################################################${RESET}"
-echo -e "${YELLOW}########################## ${BOLD_GREEN}Installing Dependencies${YELLOW} ###########################${RESET}"
-echo -e "${YELLOW}##############################################################################${RESET}"
+    # Check if the line is present in the file
+    if ! grep -Fxq "$line_to_check" "$file_path"; then
+        echo "$line_to_check" >> "$file_path"
+    fi
+}
 
-echo -e ""
+function install_go {
+    sudo curl -LO "https://go.dev/dl/${GO_FILE}"
+    sudo rm -rf /usr/local/go
+    sudo tar -C /usr/local -xzf "${GO_FILE}" 
+    sudo rm ${GO_FILE}
+    if ! command -v go &> /dev/null
+    then
+        echo -e "go: ${BOLD_RED}NOT INSTALLED"
+    else
+        echo -e "go: ${BOLD_GREEN}INSTALLED"
+        check_bashrc "$HOME/.bashrch" "export PATH=$PATH:/usr/local/go/bin"
+    fi
+}
 
-# check / install rg
-if ! command -v rg &> /dev/null
+function install_nvim {
+    sudo curl -LO "https://github.com/neovim/neovim/releases/download/stable/${NVIM_FILE}"
+    tar -C "${CONFIG_PATH}" -xzf "${NVIM_FILE}"
+    mv "${CONFIG_PATH}${NVIM_FOLDER}" "$HOME/nvim"
+    sudo rm -rf ${NVIM_FOLDER}
+    sudo rm -rf ${NVIM_FILE}
+    if ! command -v nvim &> /dev/null
+        then
+            echo -e "nvim: ${BOLD_RED}NOT INSTALLED"
+            exit 1
+        else
+            echo -e "nvim: ${BOLD_GREEN}INSTALLED"
+            folder_path="$HOME/.config/nvim"
+            # setup config folder
+            if [ ! -d "$folder_path" ]; then
+                ln -s "${CONFIG_PATH}/nvim" "$HOME/.config/nvim"
+            fi
+            # create symlink
+            if [ ! -f "/usr/bin/nvim" ]; then
+                sudo ln -s "$HOME/nvim/bin/nvim" "/usr/bin/nvim"
+            fi
+            # add aliases
+            check_bashrc "$HOME/.bashrch" "alias vi='nvim'"
+            check_bashrc "$HOME/.bashrch" "alias vim='nvim'"
+    fi
+}
+
+echo -e "${YELLOW}Install dependencies? (y/n)${RESET}"
+read -r dependencies
+
+if [ "$dependencies" == "y" ]
 then
-    echo -e "rg: ${BOLD_RED}NOT INSTALLED${RESET}"
-    curl -LO "https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/${RIPGREP_FILE}"
-    sudo dpkg -i "${RIPGREP_FILE}"
-    rm ${RIPGREP_FILE}
-    echo -e "rg: ${BOLD_GREEN}INSTALLED${RESET}"
-else
-    echo -e "rg: ${BOLD_GREEN}INSTALLED${RESET}"
+    echo -e "${YELLOW}##############################################################################${RESET}"
+    echo -e "${YELLOW}########################## ${BOLD_GREEN}Installing Dependencies${YELLOW} ###########################${RESET}"
+    echo -e "${YELLOW}##############################################################################${RESET}"
+
+    echo -e ""
+    echo -e "${YELLOW}Checking for updates...${RESET}"
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get install -y xsel fonts-powerline
+
+
+    sudo cp ./font/*.ttf /usr/share/fonts/
+    sudo fc-cache -f -v
+
+    echo -e ""
+
+    # check / install rg
+    if ! command -v rg &> /dev/null
+    then
+        echo -e "rg: ${BOLD_RED}NOT INSTALLED${RESET}"
+        curl -LO "https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/${RIPGREP_FILE}"
+        sudo dpkg -i "${RIPGREP_FILE}"
+        rm ${RIPGREP_FILE}
+        echo -e "rg: ${BOLD_GREEN}INSTALLED${RESET}"
+    else
+        echo -e "rg: ${BOLD_GREEN}INSTALLED${RESET}"
+    fi
+
+    # check / instal fd
+
+    if ! command -v fd &> /dev/null
+    then
+        echo -e "fd: ${BOLD_RED}NOT INSTALLED${RESET}"
+        curl -LO "https://github.com/sharkdp/fd/releases/download/${SHARKFD_VERSION}/${SHARKFD_FILE}"
+        sudo dpkg -i "${SHARKFD_FILE}"
+        ln -s "$(which fdfind)" ~/.local/bin/fdi
+        rm ${SHARKFD_FILE}
+        echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
+    else
+        echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
+    fi
+
+    # check npm
+
+    if ! command -v npm &> /dev/null
+    then
+        echo -e "npm: ${BOLD_RED}NOT INSTALLED${RESET}"
+        sudo apt install -y npm
+        echo -e "npm: ${BOLD_GREEN}INSTALLED${RESET}"
+    else
+        echo -e "npm: ${BOLD_GREEN}INSTALLED${RESET}"
+    fi
+
+    # check rust
+    if ! command -v rustup &> /dev/null
+    then
+        echo -e "rust: ${BOLD_RED}NOT INSTALLED${RESET}"
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        echo -e "rust: ${BOLD_GREEN}INSTALLED${RESET}"
+    else
+        echo -e "${YELLOW}Checking for updates...${RESET}"
+        rustup update
+        echo -e "rust: ${BOLD_GREEN}INSTALLED${RESET}"
+    fi
+
+    # check go
+    if ! command -v go &> /dev/null
+    then
+        install_go
+    else
+        echo -e "Checking for updates..."
+        check_version=$(go version)
+        if [[ $check_version == *"$GO_VERSION"* ]]; then
+            echo -e "go: ${BOLD_GREEN}INSTALLED"
+        else
+            install_go
+        fi
+    fi
 fi
 
-# check / instal fd
+echo -e "${YELLOW}Install NVIM? (y/n)${RESET}"
+read -r get_nvim
 
-if ! command -v fd &> /dev/null
+if [ "$get_nvim" == "y" ]
 then
-    echo -e "fd: ${BOLD_RED}NOT INSTALLED${RESET}"
-    curl -LO "https://github.com/sharkdp/fd/releases/download/${SHARKFD_VERSION}/${SHARKFD_FILE}"
-    sudo dpkg -i "${SHARKFD_FILE}"
-    ln -s "$(which fdfind)" ~/.local/bin/fdi
-    rm ${SHARKFD_FILE}
-    echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
-else
-    echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
+    echo -e ""
+
+    echo -e "${YELLOW}##############################################################################${RESET}"
+    echo -e "${YELLOW}############################## ${BOLD_GREEN}Installing NVIM${YELLOW} ###############################${RESET}"
+    echo -e "${YELLOW}##############################################################################${RESET}"
+
+    echo -e ""
+
+    # nvim
+    if ! command -v nvim &> /dev/null
+    then
+        install_nvim
+    else
+        echo -e "Checking for updates..."
+        check_version=$(nvim --version)
+        if [[ $check_version == *"$NVIM_VERSION"* ]]; then
+            echo -e "nvim: ${BOLD_GREEN}INSTALLED"
+        else
+            install_nvim
+        fi
+        
+    fi
 fi
 
-# check npm
+echo -e "${YELLOW}Install TMUX? (y/n)${RESET}"
+read -r get_tmux
 
-if ! command -v npm &> /dev/null
+if [ "$get_tmux" == "y" ]
 then
-    echo -e "npm: ${BOLD_RED}NOT INSTALLED${RESET}"
-    sudo apt install -y npm
-    echo -e "npm: ${BOLD_GREEN}INSTALLED${RESET}"
-else
-    echo -e "npm: ${BOLD_GREEN}INSTALLED${RESET}"
+    echo -e ""
+
+    echo -e "${YELLOW}##############################################################################${RESET}"
+    echo -e "${YELLOW}############################## ${BOLD_GREEN}Installing TMUX${YELLOW} ###############################${RESET}"
+    echo -e "${YELLOW}##############################################################################${RESET}"
+
+    echo -e ""
+
+    # tmux
+    if ! command -v tmux &> /dev/null
+    then
+        sudo apt-get install tmux
+        echo -e "tmux: ${BOLD_GREEN}INSTALLED"
+    else
+            echo -e "tmux: ${BOLD_GREEN}INSTALLED"
+    fi
+    
+    tmux_config="$HOME/.config/tmux"
+    if [ ! -d "$tmux_config" ]; then
+        ln -s "${CONFIG_PATH}/tmux" "$HOME/.config/tmux"
+    fi
+
+check_bashrc "$HOME/.bashrc" "if command -v tmux &> /dev/null && [ -n \"$PS1\" ] && [[ ! \"$TERM\" =~ screen ]] && [[ ! \"$TERM\" =~ tmux ]] && [ -z \"$TMUX\" ]; then
+  exec tmux
+fi"
 fi
-
-
-# check rust
-if ! command -v rustup &> /dev/null
-then
-    echo -e "rust: ${BOLD_RED}NOT INSTALLED${RESET}"
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    echo -e "rust: ${BOLD_GREEN}INSTALLED${RESET}"
-else
-    echo -e "rust: ${BOLD_GREEN}INSTALLED${RESET}"
-fi
-
