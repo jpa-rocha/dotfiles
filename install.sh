@@ -58,15 +58,9 @@ function install_go {
     sudo curl -LO "https://go.dev/dl/${GO_FILE}"
     sudo rm -rf /usr/local/go
     sudo tar -C /usr/local -xzf "${GO_FILE}" 
-    check_bashrc "${BASHRC}" "export PATH=$PATH:/usr/local/go/bin"
-    source "${BASHRC}"
+    check_bashrc "${BASHRC}" "export PATH=\$PATH:/usr/local/go/bin"
     sudo rm ${GO_FILE}
-    if ! command -v go &> /dev/null
-    then
-        echo -e "go: ${BOLD_RED}NOT INSTALLED"
-    else
-        echo -e "go: ${BOLD_GREEN}INSTALLED"
-    fi
+    echo -e "go: ${BOLD_GREEN}INSTALLED"
 }
 
 function install_nvim {
@@ -93,7 +87,6 @@ function install_nvim {
             # add aliases
             check_bashrc "${BASHRC}" "alias vi='nvim'"
             check_bashrc "${BASHRC}" "alias vim='nvim'"
-            source "${BASHRC}"
     fi
 }
 
@@ -238,8 +231,7 @@ then
         ln -s "${CONFIG_PATH}/tmux" "$HOME/.config/tmux"
     fi
 
-    check_bashrc "${BASHRC}" "if command -v tmux &> /dev/null && [ -n \"$PS1\" ] && [[ ! \"$TERM\" =~ screen ]] && [[ ! \"$TERM\" =~ tmux ]] && [ -z \"$TMUX\" ]; then
+    check_bashrc "${BASHRC}" "if command -v tmux &> /dev/null && [ -n \$PS1 ] && [[ ! \$TERM =~ screen ]] && [[ ! \$TERM =~ tmux ]] && [ -z \$TMUX ]; then
       exec tmux
     fi"
-    source "${BASHRC}"
 fi
