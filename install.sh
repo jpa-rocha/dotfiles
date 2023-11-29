@@ -44,8 +44,8 @@ BG_WHITE='\033[47m'
 RESET='\033[0m'
 
 function check_bashrc {
-    local "$file_path"="$1"
-    local "$line_to_check"="$2"
+    local file_path="$1"
+    local line_to_check="$2"
 
     # Check if the line is present in the file
     if ! grep -Fxq "$line_to_check" "$file_path"; then
@@ -225,9 +225,9 @@ then
     if ! command -v tmux &> /dev/null
     then
         sudo apt-get install tmux
-        echo -e "tmux: ${BOLD_GREEN}INSTALLED"
+        echo -e "tmux: ${BOLD_GREEN}INSTALLED${RESET}"
     else
-            echo -e "tmux: ${BOLD_GREEN}INSTALLED"
+            echo -e "tmux: ${BOLD_GREEN}INSTALLED${RESET}"
     fi
     
     tmux_config="$HOME/.config/tmux"
