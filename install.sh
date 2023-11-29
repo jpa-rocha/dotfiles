@@ -230,6 +230,8 @@ then
     if [ ! -d "$tmux_config" ]; then
         ln -s "${CONFIG_PATH}/tmux" "$HOME/.config/tmux"
     fi
-
-    check_bashrc "${BASHRC}" "if command -v tmux &> /dev/null && [ -n \"\$PS1\" ] && [[ ! \"\$TERM\" =~ screen ]] && [[ ! \"\$TERM\" =~ tmux ]] && [ -z \"\$tmux\" ]; then  exec tmux \n fi"
+    if ! grep -Fxq "${BASHRC}" "if command -v tmux &> /dev/null && [ -n \"\$PS1\" ] && [[ ! \"\$TERM\" =~ screen ]] && [[ ! \"\$TERM\" =~ tmux ]] && [ -z \"\$tmux\" ]; then  exec tmux "; then
+        echo "if command -v tmux &> /dev/null && [ -n \"\$PS1\" ] && [[ ! \"\$TERM\" =~ screen ]] && [[ ! \"\$TERM\" =~ tmux ]] && [ -z \"\$tmux\" ]; then  exec tmux " >> "${BASHRC}"
+        echo "fi" >> "${BASHRC}"
+    fi
 fi
