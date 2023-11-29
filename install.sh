@@ -231,7 +231,5 @@ then
         ln -s "${CONFIG_PATH}/tmux" "$HOME/.config/tmux"
     fi
 
-    check_bashrc "${BASHRC}" "if command -v tmux &> /dev/null && [ -n \$PS1 ] && [[ ! \$TERM =~ screen ]] && [[ ! \$TERM =~ tmux ]] && [ -z \$TMUX ]; then
-      exec tmux
-    fi"
+    check_bashrc "${BASHRC}" "if command -v tmux &> /dev/null && [ -n \"\$PS1\" ] && [[ ! \"\$TERM\" =~ screen ]] && [[ ! \"\$TERM\" =~ tmux ]] && [ -z \"\$tmux\" ]; then\n  exec tmux\nfi"
 fi
