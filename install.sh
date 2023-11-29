@@ -1,5 +1,6 @@
 #! /usr/bin/bash
 CONFIG_PATH="$HOME/.config/dotfiles/"
+BASHRC="$HOME/.bashrc"
 RIPGREP_VERSION='13.0.0'
 RIPGREP_FILE="ripgrep_${RIPGREP_VERSION}_amd64.deb"
 SHARKFD_VERSION='8.7.1'
@@ -57,7 +58,8 @@ function install_go {
     sudo curl -LO "https://go.dev/dl/${GO_FILE}"
     sudo rm -rf /usr/local/go
     sudo tar -C /usr/local -xzf "${GO_FILE}" 
-    check_bashrc "$HOME/.bashrch" "export PATH=$PATH:/usr/local/go/bin"
+    check_bashrc "${BASHRC}" "export PATH=$PATH:/usr/local/go/bin"
+    source "${BASHRC}"
     sudo rm ${GO_FILE}
     if ! command -v go &> /dev/null
     then
@@ -89,8 +91,9 @@ function install_nvim {
             folder_path="$HOME/.config/nvim"
             # setup config folder
             # add aliases
-            check_bashrc "$HOME/.bashrch" "alias vi='nvim'"
-            check_bashrc "$HOME/.bashrch" "alias vim='nvim'"
+            check_bashrc "${BASHRC}" "alias vi='nvim'"
+            check_bashrc "${BASHRC}" "alias vim='nvim'"
+            source "${BASHRC}"
     fi
 }
 
@@ -235,7 +238,8 @@ then
         ln -s "${CONFIG_PATH}/tmux" "$HOME/.config/tmux"
     fi
 
-    check_bashrc "$HOME/.bashrc" "if command -v tmux &> /dev/null && [ -n \"$PS1\" ] && [[ ! \"$TERM\" =~ screen ]] && [[ ! \"$TERM\" =~ tmux ]] && [ -z \"$TMUX\" ]; then
+    check_bashrc "${BASHRC}" "if command -v tmux &> /dev/null && [ -n \"$PS1\" ] && [[ ! \"$TERM\" =~ screen ]] && [[ ! \"$TERM\" =~ tmux ]] && [ -z \"$TMUX\" ]; then
       exec tmux
     fi"
+    source "${BASHRC}"
 fi
