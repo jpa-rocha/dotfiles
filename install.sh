@@ -106,7 +106,7 @@ then
     sudo apt-get install -y xsel fonts-powerline curl
 
 
-    sudo cp ./font/*.ttf /usr/share/fonts/
+    sudo cp ./fonts/*.ttf /usr/share/fonts/
     sudo fc-cache -f -v
 
     echo -e ""
