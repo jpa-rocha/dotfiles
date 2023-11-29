@@ -110,7 +110,7 @@ then
     echo -e "${YELLOW}Checking for updates...${RESET}"
     sudo apt-get update
     sudo apt-get upgrade -y
-    sudo apt-get install -y xsel fonts-powerline
+    sudo apt-get install -y xsel fonts-powerline curl
 
 
     sudo cp ./font/*.ttf /usr/share/fonts/
