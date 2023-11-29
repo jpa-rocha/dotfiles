@@ -123,7 +123,7 @@ then
     then
         echo -e "rg: ${BOLD_RED}NOT INSTALLED${RESET}"
         curl -LO "https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/${RIPGREP_FILE}"
-        sudo dpkg -i "${RIPGREP_FILE}"
+        sudo apt-get install ./"${RIPGREP_FILE}"
         rm ${RIPGREP_FILE}
         echo -e "rg: ${BOLD_GREEN}INSTALLED${RESET}"
     else
@@ -136,7 +136,7 @@ then
     then
         echo -e "fd: ${BOLD_RED}NOT INSTALLED${RESET}"
         curl -LO "https://github.com/sharkdp/fd/releases/download/${SHARKFD_VERSION}/${SHARKFD_FILE}"
-        sudo dpkg -i "${SHARKFD_FILE}"
+        sudo apt-get install ./"${SHARKFD_FILE}"
         ln -s "$(which fdfind)" ~/.local/bin/fdi
         rm ${SHARKFD_FILE}
         echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
@@ -238,7 +238,7 @@ then
         ln -s "${CONFIG_PATH}/tmux" "$HOME/.config/tmux"
     fi
 
-check_bashrc "$HOME/.bashrc" "if command -v tmux &> /dev/null && [ -n \"$PS1\" ] && [[ ! \"$TERM\" =~ screen ]] && [[ ! \"$TERM\" =~ tmux ]] && [ -z \"$TMUX\" ]; then
-  exec tmux
-fi"
+    check_bashrc "$HOME/.bashrc" "if command -v tmux &> /dev/null && [ -n \"$PS1\" ] && [[ ! \"$TERM\" =~ screen ]] && [[ ! \"$TERM\" =~ tmux ]] && [ -z \"$TMUX\" ]; then
+      exec tmux
+    fi"
 fi
