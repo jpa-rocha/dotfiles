@@ -1,3 +1,5 @@
+local home = os.getenv("HOME")
+
 return  {
     "nvim-neorg/neorg",
     event ="VeryLazy",
@@ -15,18 +17,9 @@ return  {
                 ["core.dirman"] = { -- Manages Neorg workspaces
                     config = {
                         workspaces = {
-                            notes = '$HOME/.config/dotfiles' .. "/notes/",
-                            journal = '$HOME/.config/dotfiles' .. "/journal/",
+                            notes = home .. ".config/dotfiles/notes/",
                         },
                     },
-                },
-                ["core.journal"] = {
-                    config = {
-                        journal_folder = '$HOME/.config/dotfiles/nvim' .. "/journal/",
-                        strategy = "nested",
-                        -- workspace = journal
-
-                    }
                 },
                 ["core.completion"] = {
                     config = {
