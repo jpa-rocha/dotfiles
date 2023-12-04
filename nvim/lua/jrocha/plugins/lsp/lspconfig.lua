@@ -131,10 +131,25 @@ return {
 
         -- configure rust
         lspconfig.rust_analyzer.setup({
-            diagnostics = {
-                enable = false
-            },
             capabilities = lsp_capabilities,
+            settings = {
+                ["rust-analyzer"] = {
+                    imports = {
+                        granularity = {
+                            group = "module",
+                        },
+                        prefix = "self",
+                    },
+                    cargo = {
+                        buildScripts = {
+                            enable = true,
+                        },
+                    },
+                    procMacro = {
+                        enable = true
+                    },
+                },
+            },
         })
 
         -- configure c/c++
