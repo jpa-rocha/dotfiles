@@ -19,5 +19,6 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window w
 -- buffers
 map("n", "<S-l>", "<cmd>bprevious<cr>", { desc = "Next buffer" })
 map("n", "<S-h>", "<cmd>bnext<cr>", { desc = "Prev buffer" })
+map("n", "<S-x>", "<cmd>BufferClose<cr>", { desc = "Close buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
