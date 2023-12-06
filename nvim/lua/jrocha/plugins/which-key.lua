@@ -43,7 +43,14 @@ return {
                 d = { search_and_replace, "Search & Replace" },
                 L = { "<cmd>Lazy<cr>" , "Lazy"},
                 M = { "<cmd>Mason<cr>", "Mason" },
-                N = { "<cmd>Neorg<cr>", "Neorg" }
+                N = { "<cmd>Neorg<cr>", "Neorg" },
+                b = {
+                    name = "Buffer Management",
+                    h = { "<cmd>BufferPrevious<cr>", "Previous Buffer"},
+                    l = { "<cmd>BufferNext<cr>", "Next Buffer"},
+                    x = { "<cmd>BufferClose<cr>", "Close Buffer"},
+                    o = { "<cmd>BufferCloseAllButCurrent<cr>", "Close Other Buffers"},
+                },
             },
         })
     end,
