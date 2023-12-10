@@ -76,6 +76,24 @@ return {
           {border = 'rounded'}
         )
 
+        -- For Templ`:w
+        -- `
+        vim.filetype.add({
+         extension = {
+          templ = "templ",
+         },
+        })
+        vim.api.nvim_create_autocmd({
+            "BufWritePre"
+          },
+          {
+            pattern = {"*.templ"},
+            callback = function()
+              vim.lsp.buf.format()
+            end,
+          }
+        )
+
         lspconfig.gopls.setup({
             capabilities = lsp_capabilities,
             settings = {
@@ -88,6 +106,7 @@ return {
                 },
                 golintci_lint = true,
             },
+            filetypes = { "go", "templ"}
         })
         -- configure http
         lspconfig.html.setup({
@@ -157,6 +176,10 @@ return {
             capabilities = lsp_capabilities,
             filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
             single_file_support = true,
+        })
+
+        lspconfig.templ.setup({
+            capabilities = lsp_capabilities
         })
     end
 }

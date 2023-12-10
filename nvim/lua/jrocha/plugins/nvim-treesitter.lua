@@ -20,6 +20,7 @@ return {
                 "html",
                 "markdown",
                 "dockerfile",
+                "templ",
             },
             incremental_selection = {
                 enable = true,
