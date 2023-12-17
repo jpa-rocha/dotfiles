@@ -37,6 +37,8 @@ return {
                 "clangd",
                 "tsserver",
                 "templ",
+                "dockerls",
+                "docker_compose_language_service",
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed
@@ -58,7 +60,8 @@ return {
                 "shfmt",
                 "clang-format",
                 "prettier",
-                "eslint_d"
+                "eslint_d",
+                "hadolint"
             },
         })
     end,

@@ -181,5 +181,13 @@ return {
         lspconfig.templ.setup({
             capabilities = lsp_capabilities
         })
+
+        lspconfig.dockerls.setup({
+            capabilities = lsp_capabilities
+        })
+
+        lspconfig.docker_compose_language_service.setup({
+            capabilities = lsp_capabilities
+        })
     end
 }
