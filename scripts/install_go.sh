@@ -1,0 +1,37 @@
+GO_VERSION="$1"
+GO_FILE="go${GO_VERSION}.linux-amd64.tar.gz"
+BASHRC="$HOME/.bashrc"
+
+BOLD_GREEN='\033[1;32m'
+
+function install_go {
+    sudo curl -LO "https://go.dev/dl/${GO_FILE}"
+    sudo rm -rf /usr/local/go
+    sudo tar -C /usr/local -xzf "${GO_FILE}" 
+    check_bashrc "${BASHRC}" "export PATH=\$PATH:/usr/local/go/bin"
+    sudo rm "${GO_FILE}"
+    echo -e "go: ${BOLD_GREEN}INSTALLED"
+}
+
+function check_bashrc {
+    local file_path="$1"
+    local line_to_check="$2"
+
+    # Check if the line is present in the file
+    if ! grep -Fxq "$line_to_check" "$file_path"; then
+        echo "$line_to_check" >> "$file_path"
+    fi
+}
+if ! command -v go &> /dev/null
+
+then
+    install_go
+else
+    echo -e "Checking for updates..."
+    check_version=$(go version)
+    if [[ $check_version == *"$GO_VERSION"* ]]; then
+        echo -e "GO: ${BOLD_GREEN}INSTALLED"
+    else
+        install_go
+    fi
+fi
