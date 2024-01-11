@@ -1,8 +1,16 @@
+#! /usr/bin/bash
 GO_VERSION="$1"
+
+if [ "${GO_VERSION}" = "" ]; then
+    echo "You must input the go version to install"
+    exit 1
+fi
+
 GO_FILE="go${GO_VERSION}.linux-amd64.tar.gz"
 BASHRC="$HOME/.bashrc"
 
 BOLD_GREEN='\033[1;32m'
+BOLD_RED='\033[1;31m'
 
 function install_go {
     sudo curl -LO "https://go.dev/dl/${GO_FILE}"
@@ -10,7 +18,7 @@ function install_go {
     sudo tar -C /usr/local -xzf "${GO_FILE}" 
     check_bashrc "${BASHRC}" "export PATH=\$PATH:/usr/local/go/bin"
     sudo rm "${GO_FILE}"
-    echo -e "go: ${BOLD_GREEN}INSTALLED"
+    echo -e "GO: ${BOLD_GREEN}INSTALLED"
 }
 
 function check_bashrc {
@@ -22,16 +30,27 @@ function check_bashrc {
         echo "$line_to_check" >> "$file_path"
     fi
 }
-if ! command -v go &> /dev/null
+is_user_root ()
+{
+    [ "$(sudo id -u)" -eq 0 ]
+}
 
-then
-    install_go
-else
-    echo -e "Checking for updates..."
-    check_version=$(go version)
-    if [[ $check_version == *"$GO_VERSION"* ]]; then
-        echo -e "GO: ${BOLD_GREEN}INSTALLED"
-    else
+if is_user_root; then
+    if ! command -v go &> /dev/null
+
+    then
         install_go
+    else
+        echo -e "Checking for updates..."
+        check_version=$(go version)
+        if [[ $check_version == *"$GO_VERSION"* ]]; then
+            echo -e "GO: ${BOLD_GREEN}INSTALLED"
+        else
+            install_go
+        fi
     fi
+else
+    echo -e "GO: ${BOLD_RED}NOT INSTALLED"
+    exit 1
 fi
+
