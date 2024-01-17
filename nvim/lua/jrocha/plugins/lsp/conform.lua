@@ -29,6 +29,9 @@ return {
                 },
                 javascript = {
                     "prettier"
+                },
+                python = {
+                    "black"
                 }
             },
             -- format_on_save = {

@@ -13,7 +13,8 @@ return {
             scss = { "stylelint" },
             sass = { "stylelint" },
             bash = { "shellharden"},
-            dockerfile = { "hadolint" }
+            dockerfile = { "hadolint" },
+            python = { "ruff" }
             -- javascript = { "eslint_d" }
         }
         local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

@@ -39,6 +39,7 @@ return {
                 "templ",
                 "dockerls",
                 "docker_compose_language_service",
+                "pyright"
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed
@@ -61,7 +62,9 @@ return {
                 "clang-format",
                 "prettier",
                 "eslint_d",
-                "hadolint"
+                "hadolint",
+                "ruff",
+                "black"
             },
         })
     end,

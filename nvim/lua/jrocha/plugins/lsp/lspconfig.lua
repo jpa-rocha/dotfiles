@@ -189,5 +189,20 @@ return {
         lspconfig.docker_compose_language_service.setup({
             capabilities = lsp_capabilities
         })
+        lspconfig.pyright.setup({
+            capabilities = lsp_capabilities,
+            cmd = { "pyright-langserver", "--stdio" },
+            filetypes = {"python"},
+            settings = {
+                python = {
+                    analysis = {
+                        autoSearchPaths = true,
+                        diagnosticMode = "openFilesOnly",
+                        useLibraryCodeForTypes = true
+                    }
+                }
+            },
+            single_file_support = true
+        })
     end
 }
