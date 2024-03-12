@@ -1,10 +1,6 @@
 #! /usr/bin/bash
 CONFIG_PATH="$HOME/.config/dotfiles/"
 BASHRC="$HOME/.bashrc"
-RIPGREP_VERSION='13.0.0'
-RIPGREP_FILE="ripgrep_${RIPGREP_VERSION}_amd64.deb"
-SHARKFD_VERSION='8.7.1'
-SHARKFD_FILE="fd-musl_${SHARKFD_VERSION}_amd64.deb"
 GO_VERSION="1.21.4"
 GO_FILE="go${GO_VERSION}.linux-amd64.tar.gz"
 NVIM_VERSION="0.9.4"
@@ -101,9 +97,9 @@ then
 
     echo -e ""
     echo -e "${YELLOW}Checking for updates...${RESET}"
-    sudo apt-get update
-    sudo apt-get upgrade -y
-    sudo apt-get install -y xsel fonts-powerline curl
+    sudo dnf update
+    sudo dnf upgrade -y
+    sudo dnf install -y xsel fonts-powerline curl gcc make 
 
 
     sudo cp ./fonts/*.ttf /usr/share/fonts/
@@ -115,9 +111,7 @@ then
     if ! command -v rg &> /dev/null
     then
         echo -e "rg: ${BOLD_RED}NOT INSTALLED${RESET}"
-        curl -LO "https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/${RIPGREP_FILE}"
-        sudo apt-get install ./"${RIPGREP_FILE}"
-        rm ${RIPGREP_FILE}
+	sudo dnf install ripgrep
         echo -e "rg: ${BOLD_GREEN}INSTALLED${RESET}"
     else
         echo -e "rg: ${BOLD_GREEN}INSTALLED${RESET}"
@@ -128,10 +122,7 @@ then
     if ! command -v fd &> /dev/null
     then
         echo -e "fd: ${BOLD_RED}NOT INSTALLED${RESET}"
-        curl -LO "https://github.com/sharkdp/fd/releases/download/${SHARKFD_VERSION}/${SHARKFD_FILE}"
-        sudo apt-get install ./"${SHARKFD_FILE}"
-        ln -s "$(which fdfind)" ~/.local/bin/fdi
-        rm ${SHARKFD_FILE}
+	dnf install fd-find
         echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
     else
         echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
@@ -142,7 +133,7 @@ then
     if ! command -v npm &> /dev/null
     then
         echo -e "npm: ${BOLD_RED}NOT INSTALLED${RESET}"
-        sudo apt install -y npm
+        sudo dnf install -y npm
         echo -e "npm: ${BOLD_GREEN}INSTALLED${RESET}"
     else
         echo -e "npm: ${BOLD_GREEN}INSTALLED${RESET}"
@@ -220,7 +211,7 @@ then
     # tmux
     if ! command -v tmux &> /dev/null
     then
-        sudo apt-get install tmux
+        sudo dnf install tmux
         echo -e "tmux: ${BOLD_GREEN}INSTALLED${RESET}"
     else
             echo -e "tmux: ${BOLD_GREEN}INSTALLED${RESET}"
