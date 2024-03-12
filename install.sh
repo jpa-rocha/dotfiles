@@ -99,7 +99,8 @@ then
     echo -e "${YELLOW}Checking for updates...${RESET}"
     sudo dnf update
     sudo dnf upgrade -y
-    sudo dnf install -y xsel fonts-powerline curl gcc make 
+    sudo dnf install -y xsel curl 
+    sudo dnf install gcc make 
 
 
     sudo cp ./fonts/*.ttf /usr/share/fonts/
