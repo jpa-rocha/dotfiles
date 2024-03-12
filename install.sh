@@ -122,7 +122,7 @@ then
     if ! command -v fd &> /dev/null
     then
         echo -e "fd: ${BOLD_RED}NOT INSTALLED${RESET}"
-	dnf install fd-find
+	sudo dnf install fd-find
         echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
     else
         echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
