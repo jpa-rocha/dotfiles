@@ -1,7 +1,7 @@
 #! /usr/bin/bash
 CONFIG_PATH="$HOME/.config/dotfiles/"
 BASHRC="$HOME/.bashrc"
-GO_VERSION="1.21.4"
+GO_VERSION="1.22.0"
 GO_FILE="go${GO_VERSION}.linux-amd64.tar.gz"
 NVIM_VERSION="0.9.4"
 NVIM_FOLDER="nvim-linux64"
@@ -99,8 +99,7 @@ then
     echo -e "${YELLOW}Checking for updates...${RESET}"
     sudo dnf update
     sudo dnf upgrade -y
-    sudo dnf install -y xsel curl 
-    sudo dnf install gcc make 
+    sudo dnf install -y xclip curl gcc make clang fzf 
 
 
     sudo cp ./fonts/*.ttf /usr/share/fonts/
