@@ -99,9 +99,10 @@ then
     echo -e "${YELLOW}Checking for updates...${RESET}"
     sudo dnf update
     sudo dnf upgrade -y
-    sudo dnf install -y xclip curl gcc make clang fzf 
+    sudo dnf install -y xclip curl gcc make clang fzf zsh 
 
-
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    cp ./.zshrc $HOME/
     sudo cp ./fonts/*.ttf /usr/share/fonts/
     sudo fc-cache -f -v
 
