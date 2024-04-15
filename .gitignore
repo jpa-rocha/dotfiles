@@ -1,5 +1,5 @@
 nvim/lazy-lock.json
 nvim/nvim
 *.log
-scricts/CHANGE_KUBECONFIG
+scripts/CHANGE_KUBECONFIG
 scripts/teltonika.sh
