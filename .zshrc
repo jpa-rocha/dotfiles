@@ -3,7 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export ZSH_CUSTOM="$ZSH/themes/custom/"
+export ZSH_CUSTOM="$ZSH/custom/themes/"
 export SHELL="/bin/zsh"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -101,13 +101,15 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# export PATH=$PATH:/usr/local/go/bin
 export FZF_BASE=/usr/bin/fzf
 export PATH=$PATH:$HOME/ouroboros
 export PATH=$PATH:$HOME/kerouac
 export KUBECONFIG=/home/jrocha/.config/kubectl/kubeconfig
 export PATH=$PATH:$HOME/.config/dotfiles/scripts/
+export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/.config/dotfiles/scripts/
+export PATH=$PATH:$HOME/aseprite/build/bin/
 
 . "$HOME/.cargo/env"
 # ALIAS
@@ -121,3 +123,4 @@ fi
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
