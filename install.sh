@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 CONFIG_PATH="$HOME/.config/dotfiles/"
-BASHRC="$HOME/.bashrc"
+BASHRC="$HOME/.zshrc"
 GO_VERSION="1.22.3"
 GO_FILE="go${GO_VERSION}.linux-amd64.tar.gz"
 NVIM_VERSION="0.10.0"
@@ -62,8 +62,13 @@ function install_go {
 function install_nvim {
     sudo curl -LO "https://github.com/neovim/neovim/releases/download/stable/${NVIM_FILE}"
     tar -C "${CONFIG_PATH}" -xzf "${NVIM_FILE}"
+
+    # clean up
     sudo rm -rf "$HOME/nvim/nvim-linux64/"
     sudo rm -rf "$HOME/.config/nvim"
+    sudo rm -rf "$HOME/nvim"
+    sudo rm -rf "/usr/bin/nvim"
+
     mv "${CONFIG_PATH}${NVIM_FOLDER}" "$HOME/nvim"
     sudo rm -rf ${NVIM_FOLDER}
     sudo rm -rf ${NVIM_FILE}
