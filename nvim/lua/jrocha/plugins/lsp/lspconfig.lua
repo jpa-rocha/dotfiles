@@ -13,6 +13,7 @@ return {
         })
         local lspconfig = require("lspconfig")
         local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local util = require("lspconfig.util")
         ---
         -- Keybindings
         ---
@@ -100,13 +101,15 @@ return {
                 gopls = {
                     analyses = {
                         unusedparams = true,
+                        unusedvariable = true
                     },
                     staticcheck = true,
                     gofumpt = true,
                 },
                 golintci_lint = true,
             },
-            filetypes = { "go", "templ"}
+            filetypes = { "go", "templ"},
+            root_dir = util.root_pattern("go.work", "go.mod", ".git")
         })
         -- configure http
         lspconfig.html.setup({
