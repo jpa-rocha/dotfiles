@@ -10,7 +10,6 @@ return {
                     "gci",
                     "gofumpt",
                     "goimports",
-                    "goimports-reviser",
                     "golines",
                     "gomodifytags"
                 },
