@@ -14,6 +14,14 @@ return {
 
         wk.register({
             ["<leader>"] = {
+                b = {
+                    name = "Buffer Management",
+                    h = { "<cmd>BufferPrevious<cr>", "Previous Buffer"},
+                    l = { "<cmd>BufferNext<cr>", "Next Buffer"},
+                    x = { "<cmd>BufferClose<cr>", "Close Buffer"},
+                    o = { "<cmd>BufferCloseAllButCurrent<cr>", "Close Other Buffers"},
+                },
+                d = { search_and_replace, "Search & Replace" },
                 f = {
                     name = "Telescope",
                     b = { "<cmd>Telescope file_browser<cr>", "File Browser" },
@@ -25,11 +33,7 @@ return {
                     m = { "<cmd>Telescope commands<cr>", "Find Commands" },
                     C = { "<cmd>Telescope colorscheme<cr>", "Find Colorschemes" }
                 },
-                s = {
-                    name = "LSP",
-                    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Show Document Symbols" }
-                },
-                g = {
+                G = {
                     name ="Git",
                     g = { "<cmd>Neogit<cr>", "NeoGit" },
                     p = { "<cmd>Gitsigns prev_hunk<cr>", "Previous Hunk" },
@@ -40,16 +44,22 @@ return {
                     R = { "<cmd>Gitsigns reset_buffer<cr>", "Revert Buffer" },
                     b = { "<cmd>Gitsigns blame_line<cr>", "Blame Line" },
                 },
-                d = { search_and_replace, "Search & Replace" },
+                g = {
+                    name = "Go Commands",
+                    a = { "<cmd>GoAddTag<cr>", "Add JSON tags"},
+                    r = { "<cmd>GoRmTag<cr>", "Remove JSON tags"},
+                    e = { "<cmd>GoIfErr<cr>", "Add error check"},
+                    f = { "<cmd>GoFillStruct<cr>", "Fill struct"},
+                    t = { "<cmd>GoTest<cr>", "go test"},
+                    v = { "<cmd>GoModVendor<cr>", "go mod vendor"},
+                    s = { "<cmd>GoAltV!<cr>", "Check Test File"},
+                },
                 L = { "<cmd>Lazy<cr>" , "Lazy"},
                 M = { "<cmd>Mason<cr>", "Mason" },
                 N = { "<cmd>Neorg<cr>", "Neorg" },
-                b = {
-                    name = "Buffer Management",
-                    h = { "<cmd>BufferPrevious<cr>", "Previous Buffer"},
-                    l = { "<cmd>BufferNext<cr>", "Next Buffer"},
-                    x = { "<cmd>BufferClose<cr>", "Close Buffer"},
-                    o = { "<cmd>BufferCloseAllButCurrent<cr>", "Close Other Buffers"},
+                s = {
+                    name = "LSP",
+                    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Show Document Symbols" }
                 },
             },
         })
