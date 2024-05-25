@@ -46,13 +46,14 @@ return {
                 },
                 g = {
                     name = "Go Commands",
-                    a = { "<cmd>GoAddTag<cr>", "Add JSON tags"},
-                    r = { "<cmd>GoRmTag<cr>", "Remove JSON tags"},
-                    e = { "<cmd>GoIfErr<cr>", "Add error check"},
-                    f = { "<cmd>GoFillStruct<cr>", "Fill struct"},
+                    a = { "<cmd>GoAddTag<cr>", "Add JSON Tags"},
+                    r = { "<cmd>GoRmTag<cr>", "Remove JSON Tags"},
+                    e = { "<cmd>GoIfErr<cr>", "Add Error check"},
+                    f = { "<cmd>GoFillStruct<cr>", "Fill Struct"},
                     t = { "<cmd>GoTest<cr>", "go test"},
                     v = { "<cmd>GoModVendor<cr>", "go mod vendor"},
                     s = { "<cmd>GoAltV!<cr>", "Check Test File"},
+                    n = { "<cmd>GoRename<cr>", "Rename Object"}
                 },
                 L = { "<cmd>Lazy<cr>" , "Lazy"},
                 M = { "<cmd>Mason<cr>", "Mason" },
