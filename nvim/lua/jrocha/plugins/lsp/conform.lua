@@ -40,7 +40,7 @@ return {
             -- },
         })
 
-        vim.keymap.set({ "n", "v" }, "<leader>c", function()
+        vim.keymap.set({ "n", "v" }, "<leader>F", function()
             conform.format({
                 lsp_fallback = true,
                 async = false,
