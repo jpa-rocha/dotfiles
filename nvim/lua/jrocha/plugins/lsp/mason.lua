@@ -39,7 +39,8 @@ return {
                 "templ",
                 "dockerls",
                 "docker_compose_language_service",
-                "pyright"
+                "pyright",
+                "taplo"
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed

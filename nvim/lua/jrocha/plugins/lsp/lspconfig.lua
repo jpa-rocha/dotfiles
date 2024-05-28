@@ -198,6 +198,11 @@ return {
         lspconfig.docker_compose_language_service.setup({
             capabilities = lsp_capabilities
         })
+
+        lspconfig.taplo.setup({
+            capabilities = lsp_capabilities
+        })
+
         lspconfig.pyright.setup({
             capabilities = lsp_capabilities,
             cmd = { "pyright-langserver", "--stdio" },
