@@ -2,9 +2,9 @@ return {
     'goolord/alpha-nvim',
     lazy = false,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function ()
-        local alpha = require'alpha'
-        local dashboard = require'alpha.themes.dashboard'
+    config = function()
+        local alpha = require 'alpha'
+        local dashboard = require 'alpha.themes.dashboard'
         dashboard.section.header.val = {
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣶⣶⣶⣶⣶⣦⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
@@ -28,14 +28,14 @@ return {
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠈⠉⠁⠈⠉⠁⠉⠉⠀⠉⠉⠈⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
         }
         dashboard.section.buttons.val = {
-            dashboard.button( "Space f b", "  File Browser", "<leader> fb"),
-            dashboard.button( "Space f f", "󰍉  Find File" , "<leader> ff"),
-            dashboard.button( "Space f r", "  Find Recent" , "<leader> fr"),
-            dashboard.button( "q", "󰗼  Quit NVIM" , ":qa<CR>"),
+            dashboard.button("Space f b", "  File Browser", "<leader> fb"),
+            dashboard.button("Space f f", "󰍉  Find File", "<leader> ff"),
+            dashboard.button("Space f r", "  Find Recent", "<leader> fr"),
+            dashboard.button("q", "󰗼  Quit NVIM", ":qa<CR>"),
         }
 
         dashboard.config.opts.noautocmd = true
-        vim.cmd[[autocmd User AlphaReady echo 'ready']]
+        vim.cmd [[autocmd User AlphaReady echo 'ready']]
         alpha.setup(dashboard.config)
     end
 }

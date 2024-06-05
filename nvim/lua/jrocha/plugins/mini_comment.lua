@@ -1,14 +1,14 @@
 return {
     'echasnovski/mini.comment',
     version = false,
-    config = function ()
+    config = function()
         comment = require("mini.comment")
         comment.setup({
             options = {
                 custom_commentstring = function()
-                  return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
+                    return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
                 end,
-              },
+            },
         })
     end
 }

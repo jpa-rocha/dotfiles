@@ -2,23 +2,23 @@ return {
     'nvim-lualine/lualine.nvim', -- plugin to install
     lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-	config = function () -- the configuration code
+    config = function() -- the configuration code
         local lualine = require('lualine')
-		local lazy_status = require("lazy.status")
+        local lazy_status = require("lazy.status")
         lualine.setup({
             options = {
                 icons_enabled = true,
                 theme = 'auto',
             },
-          sections = {
+            sections = {
                 lualine_x = {
                     {
                         lazy_status.updates,
                         cond = lazy_status.has_updates,
                     },
-                    {"encoding"},
-                    {"fileformat"},
-                    {"filename"},
+                    { "encoding" },
+                    { "fileformat" },
+                    { "filename" },
                 }, -- Corrected placement of the closing parenthesis
             },
         })

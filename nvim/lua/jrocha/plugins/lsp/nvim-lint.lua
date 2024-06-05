@@ -14,7 +14,8 @@ return {
             sass = { "stylelint" },
             bash = { "shellharden" },
             dockerfile = { "hadolint" },
-            python = { "ruff" }
+            python = { "ruff" },
+            lua = { "selene" }
             -- javascript = { "eslint_d" }
         }
         local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -24,6 +25,5 @@ return {
                 lint.try_lint()
             end,
         })
-
     end,
 }

@@ -23,5 +23,5 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.opt.wrap = true
 
--- context commenting 
+-- context commenting
 vim.g.skip_ts_context_commentstring_module = true

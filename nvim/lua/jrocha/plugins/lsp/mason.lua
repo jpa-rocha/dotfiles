@@ -64,7 +64,8 @@ return {
                 "eslint_d",
                 "hadolint",
                 "ruff",
-                "black"
+                "black",
+                "selene"
             },
         })
     end,

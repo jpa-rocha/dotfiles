@@ -16,10 +16,10 @@ return {
             ["<leader>"] = {
                 b = {
                     name = "Buffer Management",
-                    h = { "<cmd>BufferPrevious<cr>", "Previous Buffer"},
-                    l = { "<cmd>BufferNext<cr>", "Next Buffer"},
-                    x = { "<cmd>BufferClose<cr>", "Close Buffer"},
-                    o = { "<cmd>BufferCloseAllButCurrent<cr>", "Close Other Buffers"},
+                    h = { "<cmd>BufferPrevious<cr>", "Previous Buffer" },
+                    l = { "<cmd>BufferNext<cr>", "Next Buffer" },
+                    x = { "<cmd>BufferClose<cr>", "Close Buffer" },
+                    o = { "<cmd>BufferCloseAllButCurrent<cr>", "Close Other Buffers" },
                 },
                 d = { search_and_replace, "Search & Replace" },
                 f = {
@@ -34,7 +34,7 @@ return {
                     C = { "<cmd>Telescope colorscheme<cr>", "Find Colorschemes" }
                 },
                 G = {
-                    name ="Git",
+                    name = "Git",
                     g = { "<cmd>Neogit<cr>", "NeoGit" },
                     p = { "<cmd>Gitsigns prev_hunk<cr>", "Previous Hunk" },
                     n = { "<cmd>Gitsigns next_hunk<cr>", "Next Hunk" },
@@ -46,22 +46,36 @@ return {
                 },
                 g = {
                     name = "Go Commands",
-                    a = { "<cmd>GoAddTag<cr>", "Add JSON Tags"},
-                    r = { "<cmd>GoRmTag<cr>", "Remove JSON Tags"},
-                    e = { "<cmd>GoIfErr<cr>", "Add Error check"},
-                    f = { "<cmd>GoFillStruct<cr>", "Fill Struct"},
-                    t = { "<cmd>GoTest<cr>", "go test"},
-                    v = { "<cmd>GoModVendor<cr>", "go mod vendor"},
-                    s = { "<cmd>GoAltV!<cr>", "Check Test File"},
-                    n = { "<cmd>GoRename<cr>", "Rename Object"}
+                    a = { "<cmd>GoAddTag<cr>", "Add JSON Tags" },
+                    r = { "<cmd>GoRmTag<cr>", "Remove JSON Tags" },
+                    e = { "<cmd>GoIfErr<cr>", "Add Error check" },
+                    f = { "<cmd>GoFillStruct<cr>", "Fill Struct" },
+                    t = { "<cmd>GoTest<cr>", "go test" },
+                    v = { "<cmd>GoModVendor<cr>", "go mod vendor" },
+                    s = { "<cmd>GoAltV!<cr>", "Check Test File" },
+                    n = { "<cmd>GoRename<cr>", "Rename Object" }
                 },
-                L = { "<cmd>Lazy<cr>" , "Lazy"},
+                l = {
+                    name = "LSP",
+                    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Show Document Symbols" },
+                    d = { '<cmd>lua vim.lsp.buf.definition()<cr>', 'Show Definition' },
+                    D = { '<cmd>lua vim.lsp.buf.declaration()<cr>', 'Show Declaration' },
+                    i = { '<cmd>lua vim.lsp.buf.implementation()<cr>', 'Show Implementation' },
+                    o = { '<cmd>lua vim.lsp.buf.type_definition()<cr>', 'Show Type' },
+                    r = { '<cmd>lua vim.lsp.buf.references()<cr>', 'Show References' },
+                    g = { '<cmd>lua vim.lsp.buf.signature_help()<cr>', 'Show Signature' },
+                    L = { '<cmd>Telescope diagnostics<cr>', 'Show Page Diagnostics' },
+                    l = { '<cmd>lua vim.diagnostic.open_float()<cr>', 'Show Diagnostics' },
+                },
+                L = { "<cmd>Lazy<cr>", "Lazy" },
                 M = { "<cmd>Mason<cr>", "Mason" },
                 N = { "<cmd>Neorg<cr>", "Neorg" },
                 s = {
-                    name = "LSP",
-                    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Show Document Symbols" }
-                },
+                    name = "Specter",
+                    s = { '<cmd>lua require("spectre").toggle()<cr>', "Toggle Specter" },
+                    w = { '<cmd>lua require("spectre").open_visual({select_word=true})<cr>', "Select Current Word" },
+                    p = { '<cmd>lua require("spectre").open_file_search({select_word=true})<cr>', "Search Current File" }
+                }
             },
         })
     end,
