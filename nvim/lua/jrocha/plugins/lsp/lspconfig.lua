@@ -8,7 +8,7 @@ return {
     config = function()
         -- import lspconfig plugin
 
-        require("neodev").setup({
+        require("lazydev").setup({
             -- add any options here, or leave empty to use the default settings
         })
         local lspconfig = require("lspconfig")
