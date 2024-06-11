@@ -87,28 +87,10 @@ return {
                 end,
             }
         )
+        -- configure go
         local cfg = require 'go.lsp'.config()
         lspconfig.gopls.setup(cfg)
-        -- lspconfig.gopls.setup({
-        --     capabilities = lsp_capabilities,
-        --     settings = {
-        --         gopls = {
-        --             codelenses = {
-        --                 generate = true,
-        --                 gc_details = true,
-        --             },
-        --             analyses = {
-        --                 unusedparams = true,
-        --                 unusedvariable = true
-        --             },
-        --             staticcheck = true,
-        --             gofumpt = true,
-        --         },
-        --         golintci_lint = true,
-        --     },
-        --     filetypes = { "go", "templ"},
-        --     root_dir = util.root_pattern("go.work", "go.mod", ".git")
-        -- })
+
         -- configure http
         lspconfig.html.setup({
             capabilities = lsp_capabilities,
@@ -179,22 +161,27 @@ return {
             single_file_support = true,
         })
 
+        -- configure templ
         lspconfig.templ.setup({
             capabilities = lsp_capabilities
         })
 
+        -- configure docker
         lspconfig.dockerls.setup({
             capabilities = lsp_capabilities
         })
 
+        -- configure docker compose
         lspconfig.docker_compose_language_service.setup({
             capabilities = lsp_capabilities
         })
 
+        -- configure toml
         lspconfig.taplo.setup({
             capabilities = lsp_capabilities
         })
 
+        -- configure python
         lspconfig.pyright.setup({
             capabilities = lsp_capabilities,
             cmd = { "pyright-langserver", "--stdio" },
@@ -209,6 +196,11 @@ return {
                 }
             },
             single_file_support = true
+        })
+
+        -- configure earthly
+        lspconfig.earthlyls.setup({
+            capabilities = lsp_capabilities
         })
     end
 }
