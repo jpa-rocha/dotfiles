@@ -5,12 +5,11 @@ return {
         "nvim-lua/plenary.nvim",         -- required
         "nvim-telescope/telescope.nvim", -- optional
         "sindrets/diffview.nvim",        -- optional
-        "ibhagwan/fzf-lua",              -- optional
     },
     cmd = "Neogit",
     config = function()
         require("neogit").setup({
-            disable_hint = true,
+            disable_hint = false,
             kind = "replace",
             signs = {
                 section = { "", "" },

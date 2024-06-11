@@ -69,7 +69,6 @@ return {
                 },
                 L = { "<cmd>Lazy<cr>", "Lazy" },
                 M = { "<cmd>Mason<cr>", "Mason" },
-                N = { "<cmd>Neorg<cr>", "Neorg" },
                 s = {
                     name = "Specter",
                     s = { '<cmd>lua require("spectre").toggle()<cr>', "Toggle Specter" },
