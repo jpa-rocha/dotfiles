@@ -7,13 +7,9 @@ return {
     },
     config = function()
         -- import lspconfig plugin
-
-        require("lazydev").setup({
-            -- add any options here, or leave empty to use the default settings
-        })
+        require("lazydev").setup()
         local lspconfig = require("lspconfig")
         local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-        local util = require("lspconfig.util")
 
         ---
         -- Keybindings
@@ -200,7 +196,9 @@ return {
 
         -- configure earthly
         lspconfig.earthlyls.setup({
-            capabilities = lsp_capabilities
+            capabilities = lsp_capabilities,
+            cmd = { "earthlyls" },
+            filetype = { "Earthfile" },
         })
     end
 }
