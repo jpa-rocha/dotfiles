@@ -8,7 +8,6 @@ return {
     config = function()
         require('go').setup({
             disable_defaults = false, -- true|false when true set false to all boolean settings and replace all tables
-            -- settings with {}; user need to setup ALL the settings
             go = 'go', -- go command, can be go[default] or go1.18beta1
             goimports = 'gopls', -- goimports command, can be gopls[default] or either goimports or golines if need to split long lines
             gofmt = 'gopls', -- gofmt through gopls: alternative is gofumpt, goimports, golines, gofmt, etc
@@ -123,7 +122,6 @@ return {
             iferr_vertical_shift = 4                                                     -- defines where the cursor will end up vertically from the begining of if err statement
         })
     end,
-    event = { "CmdlineEnter" },
     ft = { "go", 'gomod' },
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
 }

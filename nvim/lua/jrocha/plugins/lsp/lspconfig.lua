@@ -1,5 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
+    lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
@@ -83,8 +84,8 @@ return {
             }
         )
         -- configure go
-        local cfg = require 'go.lsp'.config()
-        lspconfig.gopls.setup(cfg)
+        local gocfg = require 'go.lsp'.config()
+        lspconfig.gopls.setup(gocfg)
 
         -- configure http
         lspconfig.html.setup({

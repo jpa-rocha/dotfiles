@@ -110,7 +110,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.config/dotfiles/scripts/
 export PATH=$PATH:$HOME/aseprite/build/bin/
-
+export GOBIN=$HOME/go/bin
 . "$HOME/.cargo/env"
 # ALIAS
 alias vi='nvim'
