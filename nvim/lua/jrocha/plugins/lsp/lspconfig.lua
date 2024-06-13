@@ -66,8 +66,7 @@ return {
             { border = 'rounded' }
         )
 
-        -- For Templ`:w
-        -- `
+        -- For Templ
         vim.filetype.add({
             extension = {
                 templ = "templ",

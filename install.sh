@@ -121,6 +121,16 @@ then
 
     echo -e ""
 
+    # check / install hg
+    if ! command -v hg &> /dev/null
+    then
+        echo -e "hg: ${BOLD_RED}NOT INSTALLED${RESET}"
+	sudo dnf install mercurial
+        echo -e "hg: ${BOLD_GREEN}INSTALLED${RESET}"
+    else
+        echo -e "hg: ${BOLD_GREEN}INSTALLED${RESET}"
+    fi
+
     # check / install rg
     if ! command -v rg &> /dev/null
     then

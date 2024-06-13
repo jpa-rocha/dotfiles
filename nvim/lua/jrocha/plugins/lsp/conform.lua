@@ -11,7 +11,6 @@ return {
                     "gofumpt",
                     "goimports",
                     "golines",
-                    "gomodifytags"
                 },
                 bash = {
                     "beautysh",
