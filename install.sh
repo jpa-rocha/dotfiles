@@ -112,7 +112,9 @@ then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
     test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.zshrc
+    if ! grep -Fxq "eval \"\$($(brew --prefix)/bin/brew shellenv)\""  "${BASHRC}"; then
+        echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> "${BASHRC}"
+    fi
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     sudo cp ./fonts/*.ttf /usr/share/fonts/
     sudo fc-cache -f -v

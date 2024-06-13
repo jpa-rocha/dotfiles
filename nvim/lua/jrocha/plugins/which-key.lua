@@ -26,12 +26,13 @@ return {
                     name = "Telescope",
                     b = { "<cmd>Telescope file_browser<cr>", "File Browser" },
                     c = { "<cmd>Telescope grep_string<cr>", "Find String Under Cursor" },
+                    C = { "<cmd>Telescope colorscheme<cr>", "Find Colorschemes" },
                     f = { "<cmd>Telescope find_files<cr>", "Find File" },
+                    k = { "<cmd>Telescope keymaps<cr>", "Show Keymaps" },
+                    m = { "<cmd>Telescope commands<cr>", "Find Commands" },
                     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
                     s = { "<cmd>Telescope live_grep<cr>", "Find String in CWD" },
                     t = { "<cmd>TodoTelescope<cr>", "Find TODO's" },
-                    m = { "<cmd>Telescope commands<cr>", "Find Commands" },
-                    C = { "<cmd>Telescope colorscheme<cr>", "Find Colorschemes" }
                 },
                 G = {
                     name = "Git",
