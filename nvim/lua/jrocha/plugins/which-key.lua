@@ -35,17 +35,6 @@ return {
                     t = { "<cmd>TodoTelescope<cr>", "Find TODO's" },
                 },
                 G = {
-                    name = "Git",
-                    g = { "<cmd>Neogit<cr>", "NeoGit" },
-                    p = { "<cmd>Gitsigns prev_hunk<cr>", "Previous Hunk" },
-                    n = { "<cmd>Gitsigns next_hunk<cr>", "Next Hunk" },
-                    s = { "<cmd>Gitsigns preview_hunk<cr>", "Preview Hunk " },
-                    S = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk " },
-                    r = { "<cmd>Gitsigns reset_hunk<cr>", "Revert Hunk " },
-                    R = { "<cmd>Gitsigns reset_buffer<cr>", "Revert Buffer" },
-                    b = { "<cmd>Gitsigns blame_line<cr>", "Blame Line" },
-                },
-                g = {
                     name = "Go Commands",
                     a = { "<cmd>GoAddTag<cr>", "Add JSON Tags" },
                     r = { "<cmd>GoRmTag<cr>", "Remove JSON Tags" },
@@ -76,7 +65,18 @@ return {
                     w = { '<cmd>lua require("spectre").open_visual({select_word=true})<cr>', "Select Current Word" },
                     p = { '<cmd>lua require("spectre").open_file_search({select_word=true})<cr>', "Search Current File" }
                 },
-                t = { "<cmd>ToggleTerm<cr>", "Toggle Term"}
+                t = { "<cmd>ToggleTerm<cr>", "Toggle Term"},
+                v = {
+                    name = "Git",
+                    g = { "<cmd>Neogit<cr>", "NeoGit" },
+                    p = { "<cmd>Gitsigns prev_hunk<cr>", "Previous Hunk" },
+                    n = { "<cmd>Gitsigns next_hunk<cr>", "Next Hunk" },
+                    s = { "<cmd>Gitsigns preview_hunk<cr>", "Preview Hunk " },
+                    S = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk " },
+                    r = { "<cmd>Gitsigns reset_hunk<cr>", "Revert Hunk " },
+                    R = { "<cmd>Gitsigns reset_buffer<cr>", "Revert Buffer" },
+                    b = { "<cmd>Gitsigns blame_line<cr>", "Blame Line" },
+                },
             },
         })
     end,

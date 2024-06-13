@@ -7,6 +7,20 @@ return {
                 custom_commentstring = function()
                     return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
                 end,
+                ignore_blank_line = false,
+                start_of_line = false,
+                pad_comment_parts = true,
+            },
+            mappings = {
+                comment = 'gc',
+                comment_line = 'gcc',
+                comment_visual = 'gc',
+                textobject = 'gc',
+            },
+
+            hooks = {
+                pre = function() end,
+                post = function() end,
             },
         })
         require("mini.indentscope").setup({

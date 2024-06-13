@@ -106,7 +106,7 @@ then
     echo -e "${YELLOW}Checking for updates...${RESET}"
     sudo dnf update
     sudo dnf upgrade -y
-    sudo dnf install -y xclip curl gcc make clang fzf zsh 
+    sudo dnf install -y xclip curl gcc make clang fzf zsh ruby
 
     cp .zshrc $HOME/
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
