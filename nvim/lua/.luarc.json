@@ -1,4 +1,10 @@
 {
+    "diagnostics": {
+        "enable": true,
+        "globals": [
+            "vim"
+        ]
+    },
     "workspace.library": [
         "/home/jrocha/.local/share/nvim/lazy/neodev.nvim/types/stable",
         "/snap/nvim/2809/usr/share/nvim/runtime/lua",

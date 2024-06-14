@@ -3,26 +3,31 @@ return {
     event = "InsertEnter",
 
     dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
-        "L3MON4D3/LuaSnip",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        "hrsh7th/cmp-nvim-lsp-document-symbol",
+        "hrsh7th/cmp-cmdline",
         "saadparwaiz1/cmp_luasnip",
+        {"L3MON4D3/LuaSnip", build = "make install_jsregexp"},
         "rafamadriz/friendly-snippets",
+        "onsails/lspkind-nvim"
     },
     config = function()
         local cmp = require("cmp")
-        local luasnip = require("luasnip")
-        require("luasnip.loaders.from_vscode").lazy_load()
         local select_opts = { behavior = cmp.SelectBehavior.Select }
+        local luasnip = require("luasnip")
+        local lspkind = require('lspkind')
+        require("luasnip.loaders.from_vscode").lazy_load()
         cmp.setup({
-            completion = {
-                completeopt = "menu, menuone, preview, noselect",
-            },
-
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
-                end,
+                end
+            },
+            completion = {
+                completeopt = "menu, menuone, preview, noselect",
             },
 
             mapping = cmp.mapping.preset.insert({
@@ -33,6 +38,7 @@ return {
                 ["<C-Space>"] = cmp.mapping.complete(),
                 ["<C-e>"] = cmp.mapping.abort(),
                 ["<CR>"] = cmp.mapping.confirm({ select = false }),
+
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     local col = vim.fn.col('.') - 1
 
@@ -44,6 +50,7 @@ return {
                         cmp.complete()
                     end
                 end, { 'i', 's' }),
+
                 ['<S-Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item(select_opts)
@@ -55,9 +62,10 @@ return {
 
             sources = cmp.config.sources({
                 { name = "path" },
+                { name = "nvim_lsp_signature_help" },
                 { name = "nvim_lsp", keyword_lenght = 1 },
-                { name = "buffer",   keyword_lenght = 2 },
                 { name = "luasnip",  keyword_lenght = 2 },
+                { name = "buffer",   keyword_lenght = 3 },
             }),
 
             window = {
@@ -65,22 +73,40 @@ return {
             },
 
             formatting = {
+                expandable_indicator = true,
                 fields = { "menu", "abbr", "kind" },
-                format = function(entry, item)
-                    local menu_icon = {
-                        nvim_lsp = 'λ',
-                        luasnip = '⋗',
-                        buffer = 'Ω',
-                        path = '🖫',
-                    }
-
-                    item.menu = menu_icon[entry.source.name]
-                    return item
-                end,
-            },
-
+                format = lspkind.cmp_format({
+                    mode = 'symbol_text',
+                    maxwidth = 50,
+                    ellipsis_char = '...',
+                    show_labelDetails = true,
+                    before = function (entry, vim_item)
+                        return vim_item
+                    end
+                })
+            }
 
         })
+        cmp.setup.cmdline('/', {
+            sources = cmp.config.sources({
+                { name = 'nvim_lsp_document_symbol' }
+            }, {
+                { name = 'buffer' }
+            })
+        })
+        cmp.setup.cmdline(':', {
+              mapping = cmp.mapping.preset.cmdline(),
+              sources = cmp.config.sources({
+                { name = 'path' }
+              }, {
+                {
+                  name = 'cmdline',
+                  option = {
+                    ignore_cmds = { 'Man', '!' }
+                  }
+                }
+              })
+            })
     end,
 
 }
