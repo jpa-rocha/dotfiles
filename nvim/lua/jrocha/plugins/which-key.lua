@@ -2,7 +2,7 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     config = function()
-        local wk = require "which-key"
+        local wk = require("which-key")
         vim.o.timeout = true
         vim.o.timeoutlen = 100
 
@@ -28,11 +28,13 @@ return {
                     c = { "<cmd>Telescope grep_string<cr>", "Find String Under Cursor" },
                     C = { "<cmd>Telescope colorscheme<cr>", "Find Colorschemes" },
                     f = { "<cmd>Telescope find_files<cr>", "Find File" },
+                    h = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Find in Current Buffer" },
                     k = { "<cmd>Telescope keymaps<cr>", "Show Keymaps" },
                     m = { "<cmd>Telescope commands<cr>", "Find Commands" },
                     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
                     s = { "<cmd>Telescope live_grep<cr>", "Find String in CWD" },
                     t = { "<cmd>TodoTelescope<cr>", "Find TODO's" },
+                    T = { "<cmd>Telescope<cr>", "Telescope Commands" }
                 },
                 G = {
                     name = "Go Commands",
