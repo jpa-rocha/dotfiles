@@ -12,6 +12,14 @@ return {
             vim.fn.feedkeys("cgn")
         end
 
+        local format_region = function()
+            local conform = require("conform")
+            conform.format({
+                lsp_fallback = true,
+                async = false,
+                timeout_ms = 500,
+            })
+        end
         wk.register({
             ["<leader>"] = {
                 b = {
@@ -35,6 +43,12 @@ return {
                     s = { "<cmd>Telescope live_grep<cr>", "Find String in CWD" },
                     t = { "<cmd>TodoTelescope<cr>", "Find TODO's" },
                     T = { "<cmd>Telescope<cr>", "Telescope Commands" }
+                },
+                F = {
+                    name = "Formating",
+                    d = { "<cmd>FormatDisable<cr>", "Disable Formating on Save" },
+                    e = { "<cmd>FormatEnable<cr>", "Enable Formating on Save" },
+                    f = { format_region, "Format Regeion", mode= { "n", "v" }},
                 },
                 G = {
                     name = "Go Commands",
