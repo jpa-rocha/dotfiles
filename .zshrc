@@ -122,3 +122,5 @@ if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then tmux attach -t default ||
 fi
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if command -v tmux &>/dev/null && [ -z "/tmp/tmux-1000/default,1350814,0" ]; then tmux attach -t default || tmux new -s default
+fi

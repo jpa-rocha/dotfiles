@@ -28,3 +28,4 @@ Trying to create and customize the logger is in progress, the following sites ha
 (Go Slog Package)[https://www.gopherguides.com/articles/golang-slog-package]
 (About Structured Logging in Go 1.21)[https://lukas.zapletalovi.com/posts/2023/about-structured-logging-in-go121/]
 (Creating a pretty console logger using Go's slog package)[https://dusted.codes/creating-a-pretty-console-logger-using-gos-slog-package]
+(golang slog handler guide)[https://github.com/golang/example/tree/master/slog-handler-guide]
