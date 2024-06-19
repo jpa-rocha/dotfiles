@@ -48,7 +48,7 @@ return {
                     name = "Formating",
                     d = { "<cmd>FormatDisable<cr>", "Disable Formating on Save" },
                     e = { "<cmd>FormatEnable<cr>", "Enable Formating on Save" },
-                    f = { format_region, "Format Regeion", mode= { "n", "v" }},
+                    f = { format_region, "Format Regeion", mode = { "n", "v" } },
                 },
                 G = {
                     name = "Go Commands",
@@ -61,6 +61,7 @@ return {
                     s = { "<cmd>GoAltV!<cr>", "Check Test File" },
                     n = { "<cmd>GoRename<cr>", "Rename Object" }
                 },
+                J = { "<cmd>Journal<cr>", "Journal" },
                 l = {
                     name = "LSP",
                     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Show Document Symbols" },
@@ -81,7 +82,7 @@ return {
                     w = { '<cmd>lua require("spectre").open_visual({select_word=true})<cr>', "Select Current Word" },
                     p = { '<cmd>lua require("spectre").open_file_search({select_word=true})<cr>', "Search Current File" }
                 },
-                t = { "<cmd>ToggleTerm<cr>", "Toggle Term"},
+                t = { "<cmd>ToggleTerm<cr>", "Toggle Term" },
                 v = {
                     name = "Git",
                     g = { "<cmd>Neogit<cr>", "NeoGit" },
