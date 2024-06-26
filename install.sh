@@ -46,14 +46,14 @@ function check_bashrc {
 
     # Check if the line is present in the file
     if ! grep -Fxq "$line_to_check" "$file_path"; then
-        echo "$line_to_check" >> "$file_path"
+        echo "$line_to_check" >>"$file_path"
     fi
 }
 
 function install_go {
     sudo curl -LO "https://go.dev/dl/${GO_FILE}"
     sudo rm -rf /usr/local/go
-    sudo tar -C /usr/local -xzf "${GO_FILE}" 
+    sudo tar -C /usr/local -xzf "${GO_FILE}"
     check_bashrc "${BASHRC}" "export PATH=\$PATH:/usr/local/go/bin"
     sudo rm ${GO_FILE}
     echo -e "go: ${BOLD_GREEN}INSTALLED"
@@ -79,25 +79,23 @@ function install_nvim {
     if [ ! -f "/usr/bin/nvim" ]; then
         sudo ln -s "$HOME/nvim/bin/nvim" "/usr/bin/nvim"
     fi
-    if ! command -v nvim &> /dev/null
-        then
-            echo -e "nvim: ${BOLD_RED}NOT INSTALLED"
-            exit 1
-        else
-            echo -e "nvim: ${BOLD_GREEN}INSTALLED"
-            folder_path="$HOME/.config/nvim"
-            # setup config folder
-            # add aliases
-            check_bashrc "${BASHRC}" "alias vi='nvim'"
-            check_bashrc "${BASHRC}" "alias vim='nvim'"
+    if ! command -v nvim &>/dev/null; then
+        echo -e "nvim: ${BOLD_RED}NOT INSTALLED"
+        exit 1
+    else
+        echo -e "nvim: ${BOLD_GREEN}INSTALLED"
+        folder_path="$HOME/.config/nvim"
+        # setup config folder
+        # add aliases
+        check_bashrc "${BASHRC}" "alias vi='nvim'"
+        check_bashrc "${BASHRC}" "alias vim='nvim'"
     fi
 }
 
 echo -e "${YELLOW}Install dependencies? (y/n)${RESET}"
 read -r dependencies
 
-if [ "$dependencies" == "y" ]
-then
+if [ "$dependencies" == "y" ]; then
     echo -e "${YELLOW}##############################################################################${RESET}"
     echo -e "${YELLOW}########################## ${BOLD_GREEN}Installing Dependencies${YELLOW} ###########################${RESET}"
     echo -e "${YELLOW}##############################################################################${RESET}"
@@ -106,14 +104,14 @@ then
     echo -e "${YELLOW}Checking for updates...${RESET}"
     sudo dnf update
     sudo dnf upgrade -y
-    sudo dnf install -y xclip curl gcc make clang fzf zsh ruby
+    sudo dnf install -y xclip curl gcc make clang fzf zsh ruby luarocks bat
 
     cp .zshrc $HOME/
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
     test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    if ! grep -Fxq "eval \"\$($(brew --prefix)/bin/brew shellenv)\""  "${BASHRC}"; then
-        echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> "${BASHRC}"
+    if ! grep -Fxq "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" "${BASHRC}"; then
+        echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>"${BASHRC}"
     fi
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     sudo cp ./fonts/*.ttf /usr/share/fonts/
@@ -122,20 +120,18 @@ then
     echo -e ""
 
     # check / install hg
-    if ! command -v hg &> /dev/null
-    then
+    if ! command -v hg &>/dev/null; then
         echo -e "hg: ${BOLD_RED}NOT INSTALLED${RESET}"
-	sudo dnf install mercurial
+        sudo dnf install mercurial
         echo -e "hg: ${BOLD_GREEN}INSTALLED${RESET}"
     else
         echo -e "hg: ${BOLD_GREEN}INSTALLED${RESET}"
     fi
 
     # check / install rg
-    if ! command -v rg &> /dev/null
-    then
+    if ! command -v rg &>/dev/null; then
         echo -e "rg: ${BOLD_RED}NOT INSTALLED${RESET}"
-	sudo dnf install ripgrep
+        sudo dnf install ripgrep
         echo -e "rg: ${BOLD_GREEN}INSTALLED${RESET}"
     else
         echo -e "rg: ${BOLD_GREEN}INSTALLED${RESET}"
@@ -143,10 +139,9 @@ then
 
     # check / instal fd
 
-    if ! command -v fd &> /dev/null
-    then
+    if ! command -v fd &>/dev/null; then
         echo -e "fd: ${BOLD_RED}NOT INSTALLED${RESET}"
-	sudo dnf install fd-find
+        sudo dnf install fd-find
         echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
     else
         echo -e "fd: ${BOLD_GREEN}INSTALLED${RESET}"
@@ -154,8 +149,7 @@ then
 
     # check npm
 
-    if ! command -v npm &> /dev/null
-    then
+    if ! command -v npm &>/dev/null; then
         echo -e "npm: ${BOLD_RED}NOT INSTALLED${RESET}"
         sudo dnf install -y npm
         echo -e "npm: ${BOLD_GREEN}INSTALLED${RESET}"
@@ -164,8 +158,7 @@ then
     fi
 
     # check rust
-    if ! command -v rustup &> /dev/null
-    then
+    if ! command -v rustup &>/dev/null; then
         echo -e "rust: ${BOLD_RED}NOT INSTALLED${RESET}"
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
         echo -e "rust: ${BOLD_GREEN}INSTALLED${RESET}"
@@ -176,8 +169,7 @@ then
     fi
 
     # check go
-    if ! command -v go &> /dev/null
-    then
+    if ! command -v go &>/dev/null; then
         install_go
     else
         echo -e "Checking for updates..."
@@ -193,8 +185,7 @@ fi
 echo -e "${YELLOW}Install NVIM? (y/n)${RESET}"
 read -r get_nvim
 
-if [ "$get_nvim" == "y" ]
-then
+if [ "$get_nvim" == "y" ]; then
     echo -e ""
 
     echo -e "${YELLOW}##############################################################################${RESET}"
@@ -204,8 +195,7 @@ then
     echo -e ""
 
     # nvim
-    if ! command -v nvim &> /dev/null
-    then
+    if ! command -v nvim &>/dev/null; then
         install_nvim
     else
         echo -e "Checking for updates..."
@@ -215,15 +205,14 @@ then
         else
             install_nvim
         fi
-        
+
     fi
 fi
 
 echo -e "${YELLOW}Install TMUX? (y/n)${RESET}"
 read -r get_tmux
 
-if [ "$get_tmux" == "y" ]
-then
+if [ "$get_tmux" == "y" ]; then
     echo -e ""
 
     echo -e "${YELLOW}##############################################################################${RESET}"
@@ -233,22 +222,21 @@ then
     echo -e ""
 
     # tmux
-    if ! command -v tmux &> /dev/null
-    then
+    if ! command -v tmux &>/dev/null; then
         sudo dnf install tmux
         echo -e "tmux: ${BOLD_GREEN}INSTALLED${RESET}"
     else
-            echo -e "tmux: ${BOLD_GREEN}INSTALLED${RESET}"
+        echo -e "tmux: ${BOLD_GREEN}INSTALLED${RESET}"
     fi
-    
+
     tmux_config="$HOME/.config/tmux"
     if [ ! -d "$tmux_config" ]; then
         ln -s "${CONFIG_PATH}/tmux" "$HOME/.config/tmux"
     fi
     tmux_bash=$"if command -v tmux &>/dev/null && [ -z \"$TMUX\" ]; then tmux attach -t default || tmux new -s default"
-    if ! grep -Fxq "${tmux_bash}"  "${BASHRC}"; then
-        echo "$tmux_bash" >> "${BASHRC}"
-        echo "fi" >> "${BASHRC}"
+    if ! grep -Fxq "${tmux_bash}" "${BASHRC}"; then
+        echo "$tmux_bash" >>"${BASHRC}"
+        echo "fi" >>"${BASHRC}"
 
     fi
 fi

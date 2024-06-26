@@ -48,7 +48,7 @@ return {
                     name = "Formating",
                     d = { "<cmd>FormatDisable<cr>", "Disable Formating on Save" },
                     e = { "<cmd>FormatEnable<cr>", "Enable Formating on Save" },
-                    f = { format_region, "Format Regeion", mode = { "n", "v" } },
+                    f = { format_region, "Format Region", mode = { "n", "v" } },
                 },
                 G = {
                     name = "Go Commands",
