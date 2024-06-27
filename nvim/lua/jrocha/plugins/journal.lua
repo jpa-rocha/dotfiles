@@ -2,10 +2,10 @@ return {
     "jakobkhansen/journal.nvim",
     config = function()
         require("journal").setup({
-            filetype = 'md',                     -- Filetype to use for new journal entries
-            root = '~/.config/dotfiles/journal', -- Root directory for journal entries
-            date_format = '%d/%m/%Y',            -- Date format for `:Journal <date-modifier>`
-            autocomplete_date_modifier = "end",  -- "always"|"never"|"end". Enable date modifier autocompletion
+            filetype = 'md',                    -- Filetype to use for new journal entries
+            root = '~/.config/journal',         -- Root directory for journal entries
+            date_format = '%d/%m/%Y',           -- Date format for `:Journal <date-modifier>`
+            autocomplete_date_modifier = "end", -- "always"|"never"|"end". Enable date modifier autocompletion
 
             -- Configuration for journal entries
             journal = {
@@ -26,7 +26,7 @@ return {
                         template = "# Week %W %B %Y\n",
                         frequency = { day = 7 },
                         date_modifier =
-                        "monday"                 -- Optional. Date modifier applied before other modifier given to `:Journal`
+                        "monday" -- Optional. Date modifier applied before other modifier given to `:Journal`
                     },
                     month = {
                         format = '%Y/%m-%B/%B',
