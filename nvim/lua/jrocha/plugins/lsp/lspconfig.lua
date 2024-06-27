@@ -90,6 +90,7 @@ return {
         -- configure http
         lspconfig.html.setup({
             capabilities = lsp_capabilities,
+            filetypes = { "html", "templ" },
         })
 
         -- configure css
