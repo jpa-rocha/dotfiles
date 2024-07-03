@@ -53,13 +53,16 @@ return {
                 G = {
                     name = "Go Commands",
                     a = { "<cmd>GoAddTag<cr>", "Add JSON Tags" },
-                    r = { "<cmd>GoRmTag<cr>", "Remove JSON Tags" },
+                    d = { "<cmd>GoDebug<cr>", "Launch Debugger" },
+                    D = { "<cmd>GoDbgStop<cr>", "Stop Debugger" },
+                    k = { "<cmd>GoDbgKeys<cr>", "Show Debuger Keys" },
                     e = { "<cmd>GoIfErr<cr>", "Add Error check" },
                     f = { "<cmd>GoFillStruct<cr>", "Fill Struct" },
+                    n = { "<cmd>GoRename<cr>", "Rename Object" },
+                    r = { "<cmd>GoRmTag<cr>", "Remove JSON Tags" },
+                    s = { "<cmd>GoAltV!<cr>", "Check Test File" },
                     t = { "<cmd>GoTest<cr>", "go test" },
                     v = { "<cmd>GoModVendor<cr>", "go mod vendor" },
-                    s = { "<cmd>GoAltV!<cr>", "Check Test File" },
-                    n = { "<cmd>GoRename<cr>", "Rename Object" }
                 },
                 J = { "<cmd>Journal<cr>", "Journal" },
                 l = {

@@ -51,6 +51,7 @@ return {
             ensure_installed = {
                 "stylua",
                 "stylelint",
+                "delve",
                 "golangci-lint",
                 "gci",
                 "gofumpt",

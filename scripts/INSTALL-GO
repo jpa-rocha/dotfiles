@@ -15,7 +15,7 @@ BOLD_RED='\033[1;31m'
 function install_go {
     sudo curl -LO "https://go.dev/dl/${GO_FILE}"
     sudo rm -rf /usr/local/go
-    sudo tar -C /usr/local -xzf "${GO_FILE}" 
+    sudo tar -C /usr/local -xzf "${GO_FILE}"
     check_bashrc "${BASHRC}" "export PATH=\$PATH:/usr/local/go/bin"
     sudo rm "${GO_FILE}"
     echo -e "GO: ${BOLD_GREEN}INSTALLED"
@@ -27,18 +27,16 @@ function check_bashrc {
 
     # Check if the line is present in the file
     if ! grep -Fxq "$line_to_check" "$file_path"; then
-        echo "$line_to_check" >> "$file_path"
+        echo "$line_to_check" >>"$file_path"
     fi
 }
-is_user_root ()
-{
+
+is_user_root() {
     [ "$(sudo id -u)" -eq 0 ]
 }
 
 if is_user_root; then
-    if ! command -v go &> /dev/null
-
-    then
+    if ! command -v go &>/dev/null; then
         install_go
     else
         echo -e "Checking for updates..."
@@ -53,4 +51,3 @@ else
     echo -e "GO: ${BOLD_RED}NOT INSTALLED"
     exit 1
 fi
-
