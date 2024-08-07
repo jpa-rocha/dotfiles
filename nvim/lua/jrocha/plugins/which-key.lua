@@ -37,7 +37,6 @@ return {
             { "<leader>Gs", "<cmd>GoAltV!<cr>",                                                     desc = "Check Test File" },
             { "<leader>Gt", "<cmd>GoTest<cr>",                                                      desc = "go test" },
             { "<leader>Gv", "<cmd>GoModVendor<cr>",                                                 desc = "go mod vendor" },
-            { "<leader>J",  "<cmd>Journal<cr>",                                                     desc = "Journal" },
             { "<leader>L",  "<cmd>Lazy<cr>",                                                        desc = "Lazy" },
             { "<leader>M",  "<cmd>Mason<cr>",                                                       desc = "Mason" },
             { "<leader>b",  group = "Buffer Management" },
